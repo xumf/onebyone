@@ -25,9 +25,13 @@ func init() {
 			"qq", "tg", "wx",
 		} {
 			core.Bucket("pin" + strings.ToUpper(tp)).Foreach(func(k, v []byte) error {
+				tempMsg := message
+				if tp == "wx" {
+					tempMsg = translate(message)
+				}
 				if string(k) == ptPin && ptPin != "" {
 					if push, ok := core.Pushs[tp]; ok {
-						push(string(v), message)
+						push(string(v), tempMsg)
 					}
 				}
 				return nil
@@ -35,4 +39,17 @@ func init() {
 		}
 		c.String(200, "ok")
 	})
+}
+
+func translate(str string) string {
+	tempMsg := str
+	tempMsg = strings.Replace(tempMsg, "⭕", "[emoji=\\u2b55]" -1)
+	tempMsg = strings.Replace(tempMsg, "🧧", "[emoji=\\uD83E\\uDDE7]" -1)
+	tempMsg = strings.Replace(tempMsg, "🥚", "[emoji=\\ud83e\\udd5a]" -1)
+	tempMsg = strings.Replace(tempMsg, "💰", "[emoji=\\ud83d\\udcb0]" -1)
+	tempMsg = strings.Replace(tempMsg, "⏰", "[emoji=\\u23f0]" -1)
+	tempMsg = strings.Replace(tempMsg, "🍒", "[emoji=\\ud83c\\udf52\\u00a]" -1)
+	tempMsg = strings.Replace(tempMsg, "🐶", "[emoji=\\ud83d\\udc36]" -1)
+	tempMsg = strings.Replace(tempMsg, "🎰", "[emoji=\\ud83c\\udfb0]" -1)
+	return tempMsg
 }
