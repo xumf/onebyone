@@ -31,7 +31,7 @@ func init() {
 				}
 				if string(k) == ptPin && ptPin != "" {
 					if push, ok := core.Pushs[tp]; ok {
-						push(string(v), tempMsg)
+						push(string(v), tempMsg, nil)
 					}
 				}
 				return nil
