@@ -1,2 +1,2 @@
 # onebyone
-微信一对一推送
+支持TG，qq，wechat一对一推送
