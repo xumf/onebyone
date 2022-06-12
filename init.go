@@ -28,7 +28,7 @@ func init() {
 				translateEmoji(&message, tp == "wx")
 				if string(k) == ptPin && ptPin != "" {
 					if push, ok := core.Pushs[tp]; ok {
-						push(string(v), message, nil, nil)
+						push(string(v), message, nil, "")
 					}
 				}
 				return nil
