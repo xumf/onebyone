@@ -24,11 +24,11 @@ func init() {
 		for _, tp := range []string{
 			"qq", "tg", "wx",
 		} {
-			core.Bucket("pin" + strings.ToUpper(tp)).Foreach(func(k, v []byte) error {
+			core.MakeBucket("pin" + strings.ToUpper(tp)).Foreach(func(k, v []byte) error {
 				translateEmoji(&message, tp == "wx")
 				if string(k) == ptPin && ptPin != "" {
 					if push, ok := core.Pushs[tp]; ok {
-						push(string(v), message, nil, nil)
+						push(string(v), message, nil, "")
 					}
 				}
 				return nil
